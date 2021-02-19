@@ -30,7 +30,7 @@ const SignUp = () => {
     })
     
     localStorage.setItem("accessToken", res.data)
-  //  props.history.push("/")
+   history.push("/")
   }
   return (
     <Container fluid id="signup-page-wrapper">
