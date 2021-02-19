@@ -12,23 +12,16 @@ const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => ({
   fetchTrackswithThunk: (id) =>
     dispatch(async (dispatch) => {
-      const url = "https://deezerdevs-deezer.p.rapidapi.com/artist/";
-      const response = await fetch(url + id + "/top?limit=50", {
-        headers: {
-          "x-rapidapi-key":
-            "7058b459femsh8bbc3e5e09ff45bp16ae10jsnaa8151340a4c",
-          "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-        },
-      });
+      // const url = "https://deezerdevs-deezer.p.rapidapi.com/artist/";
+      const response = await fetch(process.env.REACT_APP_API_URL + id);
 
       const tracks = await response.json();
-      console.log("tracks:", tracks.data);
+      // console.log("tracks:", tracks.data);
 
       if (response.ok) {
         dispatch({
           type: "SET_TOP_ALBUMS",
           payload: tracks.data,
-
         });
       } else {
         dispatch({
@@ -37,19 +30,13 @@ const mapDispatchToProps = (dispatch) => ({
         });
       }
     }),
-
-  fetchAlbumswithThunk: (id) =>
+    fetchAlbumswithThunk: (id) =>
     dispatch(async (dispatch) => {
-      const url = "https://deezerdevs-deezer.p.rapidapi.com/artist/";
-      const response = await fetch(url + id + "/albums", {
-        headers: {
-          "x-rapidapi-key": process.env.REACT_APP_API_KEY,
-          "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-        },
-      });
+      const response = await fetch(
+        process.env.REACT_APP_API_URL + `album/` + id
+      );
 
       const albums = await response.json();
-      console.log("albums:", albums.data);
 
       if (response.ok) {
         dispatch({
@@ -63,17 +50,11 @@ const mapDispatchToProps = (dispatch) => ({
         });
       }
     }),
-
-  fetchArtistwithThunk: (id) =>
+    fetchArtistwithThunk: (id) =>
     dispatch(async (dispatch) => {
-      const url = "https://deezerdevs-deezer.p.rapidapi.com/artist/";
-      const response = await fetch(url + id, {
-        headers: {
-          "x-rapidapi-key":
-            "7058b459femsh8bbc3e5e09ff45bp16ae10jsnaa8151340a4c",
-          "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-        },
-      });
+      const response = await fetch(
+        process.env.REACT_APP_API_URL + `artist/` + id + "/top?limit=50"
+      );
 
       const artist = await response.json();
       console.log("artist:", artist);
@@ -91,7 +72,6 @@ const mapDispatchToProps = (dispatch) => ({
       }
     }),
 });
-
 class artistPage extends React.Component {
   state = {
     show: 10,
