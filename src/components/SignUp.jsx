@@ -18,20 +18,33 @@ const SignUp = () => {
   const history = useHistory()
 
   const login = async ()=> {
-    const url=process.env.REACT_APP_URL
-    const res = await axios(`${url}users/login}`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: {
-        email, password
-      }, withCredentials: true // use cookies
-    })
+    // try {
+      const url=process.env.REACT_APP_URL
+      const res = await axios(`${url}users/login`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: {
+          email, password
+        }, withCredentials: true // use cookies
+      })
+      console.log(res)
+      localStorage.setItem("accessToken", res.data)
+       history.push("/")
+      // if (res.ok){
+      // // localStorage.setItem("accessToken", res.data)
+      // //  history.push("/home")
+      // }
+      // else{console.log(res.error)}
     
-    localStorage.setItem("accessToken", res.data)
-   history.push("/")
-  }
+      
+    // } catch (error) {
+    //   console.log(error)
+    // }
+      
+    }
+   
   return (
     <Container fluid id="signup-page-wrapper">
       <div className="sign-logo-wrapper">
