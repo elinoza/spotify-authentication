@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => state;
 
+
 const mapDispatchToProps = (dispatch) => ({
   toggleLoad: (load) =>
     dispatch({
@@ -14,21 +15,13 @@ const mapDispatchToProps = (dispatch) => ({
     }),
   populateArtists: (genre) =>
     dispatch(async (dispatch, getState) => {
-      let response = await fetch(
-        `https://deezerdevs-deezer.p.rapidapi.com/genre/` + genre + `/artists`,
-        {
-          method: "GET",
-          headers: {
-            "x-rapidapi-key": process.env.REACT_APP_API_KEY,
-            "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-          },
-        }
-      );
+      let response = await fetch(process.env.REACT_APP_API_URL + genre, {
+        method: "GET",
+      });
       let artists = await response.json();
-      // console.log(artists.data);
       dispatch({
         type: "POPULATE_ARTISTS",
-        payload: artists.data,
+        payload: artists,
       });
     }),
 });
