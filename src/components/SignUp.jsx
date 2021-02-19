@@ -42,7 +42,7 @@ const SignUp = () => {
           <Image src={fb} id="fb" />
           CONTINUE WITH FACEBOOK
         </Button>
-        <a href="http://localhost:3005/users/spotifyLoginLogin">  <Button className="signup-btn apple my-2">CONTINUE WITH SPOTIFY</Button></a>
+        <a href="http://localhost:3005/users/spotifyLogin">  <Button className="signup-btn apple my-2">CONTINUE WITH SPOTIFY</Button></a>
         <a href="http://localhost:3005/users/googleLogin"> <Button className="signup-btn google my-2">CONTINUE WITH GOOGLE</Button></a>
       </div>
       <h6>OR</h6>
